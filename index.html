@@ -74,21 +74,51 @@
         #senderNameDisplay {
             display: none;
             font-size: 2em;
-            font-weight: 900;
-            color: var(--gold-color);
+            font-weight: 700;
             margin-top: 25px;
-            animation: float3D 4s ease-in-out infinite;
-            text-shadow: 
-                0px 1px 0px #ccc, 0px 2px 0px #c9c9c9, 0px 3px 0px #bbb,
-                0px 4px 0px #b9b9b9, 0px 5px 0px #aaa, 0px 6px 1px rgba(0,0,0,0.1),
-                0px 0px 5px rgba(0,0,0,0.1), 0px 1px 3px rgba(0,0,0,0.3),
-                0px 3px 5px rgba(0,0,0,0.2), 0px 5px 10px rgba(0,0,0,0.25);
-            letter-spacing: 2px;
+            /* एनिमेशन अब सीधे नाम पर लागू होगा */
+        }
+        
+        .sender-name {
+            font-weight: 900;
+            display: block; /* नाम को अलग लाइन में रखने के लिए */
+            animation: floatEnhanced 6s ease-in-out infinite, color-cycle 8s ease-in-out infinite;
+            background: linear-gradient(45deg, #ff00ff, #ffdb00, #adff2f, #00c3ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none; /* कलर एनिमेशन के लिए शैडो हटा दें */
         }
 
-        @keyframes float3D {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .from-text {
+            font-size: 0.6em; /* नाम से छोटा टेक्स्ट */
+            font-weight: 400;
+            color: #f0f0f0;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        @keyframes floatEnhanced {
+            0%, 100% {
+                transform: translateY(0) rotateZ(0deg);
+            }
+            25% {
+                transform: translateY(-12px) rotateZ(-4deg);
+            }
+            50% {
+                transform: translateY(0) rotateZ(0deg);
+            }
+            75% {
+                transform: translateY(-8px) rotateZ(4deg);
+            }
+        }
+        
+        @keyframes color-cycle {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
 
         .input-area { margin-top: 30px; }
@@ -119,20 +149,18 @@
         }
         #whatsapp-icon { width: 22px; height: 22px; margin-right: 10px; fill: #333; }
         
-        /* विज्ञापन कंटेनर के लिए स्टाइल */
         .ad-container {
-            margin: 20px 0; /* ऊपर-नीचे स्पेस */
+            margin: 20px 0;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 50px; /* विज्ञापन न होने पर भी थोड़ी जगह रहे */
+            min-height: 50px;
             z-index: 2;
         }
         
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
-        /* Tablet और Desktop के लिए Media Query */
         @media (min-width: 600px) {
             #greeting { font-size: 3em; }
             #senderNameDisplay { font-size: 2.5em; }
@@ -147,9 +175,6 @@
     <canvas class="background-canvas" id="glitter-canvas"></canvas>
     <canvas id="fireworks-canvas"></canvas>
 
-    <!-- ======================= -->
-    <!-- === ऊपर वाला विज्ञापन === -->
-    <!-- ======================= -->
     <div class="ad-container">
         <!-- यहाँ अपना विज्ञापन कोड (जैसे AdSense) डालें -->
     </div>
@@ -169,16 +194,11 @@
         </div>
     </div>
     
-    <!-- ======================= -->
-    <!-- === नीचे वाला विज्ञापन === -->
-    <!-- ======================= -->
     <div class="ad-container">
         <!-- यहाँ अपना विज्ञापन कोड (जैसे AdSense) डालें -->
     </div>
 
     <script>
-        // जावास्क्रिप्ट और एनिमेशन कोड यहाँ आएगा
-        // (स्क्रिप्ट में कोई बदलाव नहीं है)
         const generateBtn = document.getElementById('generateBtn');
         const inputAreaParagraph = document.querySelector('.input-area p');
 
@@ -189,7 +209,8 @@
             
             if (senderName && nameDisplayElement) {
                 const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
-                nameDisplayElement.innerHTML = `~ ${decodedName} की तरफ़ से ~`;
+                // नाम और "की तरफ से" को अलग-अलग स्टाइल के लिए स्पैन में डालें
+                nameDisplayElement.innerHTML = `<span class="sender-name">${decodedName}</span><span class="from-text">की तरफ़ से</span>`;
                 nameDisplayElement.style.display = 'block';
                 inputAreaParagraph.textContent = 'अब आप भी अपना नाम लिखकर आगे भेजें:';
             }
@@ -221,6 +242,7 @@
             }
         });
 
+        // बाकी जावास्क्रिप्ट (एनिमेशन) में कोई बदलाव नहीं
         const glitterCanvas = document.getElementById('glitter-canvas');
         const glitterCtx = glitterCanvas.getContext('2d');
         glitterCanvas.width = window.innerWidth;
