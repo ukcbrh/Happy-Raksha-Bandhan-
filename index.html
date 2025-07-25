@@ -13,8 +13,7 @@
     <title>Happy Raksha Bandhan - Royal Wishes</title>
     
     <style>
-        /* --- CSS स्टाइलिंग (नई रॉयल गोल्डन थीम) --- */
-        @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&family=Poppins:wght@700&display=swap');
         
         :root {
             --gold-color: #FFD700;
@@ -62,27 +61,44 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
         
-        /* --- नाम के लिए नया 3D स्टाइल और एनीमेशन --- */
+        /* --- === नया धमाकेदार, कलरफुल 3D नाम स्टाइल === --- */
         #senderNameDisplay {
             display: none; /* डिफ़ॉल्ट रूप से छिपा हुआ */
-            font-size: 1.8em;
+            font-family: 'Poppins', sans-serif; /* और आकर्षक दिखने वाला फॉन्ट */
+            font-size: 2.5em; /* नाम का साइज बड़ा किया गया */
             font-weight: 700;
-            color: var(--gold-color);
             margin-top: 25px;
-            animation: float3D 4s ease-in-out infinite;
-            text-shadow: 
-                0px 1px 0px #c0c0c0,
-                0px 2px 0px #b0b0b0,
-                0px 3px 0px #a0a0a0,
-                0px 4px 0px #909090,
-                0px 5px 10px rgba(0, 0, 0, 0.6);
+            
+            /* बहुरंगी ग्रेडिएंट टेक्स्ट */
+            background: linear-gradient(45deg, #FDB813, #F87A2D, #C12A6C, #773380);
+            background-size: 200% auto; /* एनीमेशन के लिए ग्रेडिएंट का साइज दोगुना */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* गहरा 3D इफ़ेक्ट */
+            text-shadow: 3px 5px 8px rgba(0, 0, 0, 0.5);
+
+            /* नई 'पल्स और शाइन' एनीमेशन */
+            animation: pulseAndShine 4s linear infinite;
         }
 
-        @keyframes float3D {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        /* 'पल्स और शाइन' एनीमेशन की परिभाषा */
+        @keyframes pulseAndShine {
+            0% {
+                background-position: 0% 50%;
+                transform: scale(1);
+            }
+            50% {
+                background-position: 100% 50%;
+                transform: scale(1.05); /* धड़कने का इफ़ेक्ट */
+            }
+            100% {
+                background-position: 0% 50%;
+                transform: scale(1);
+            }
         }
+        /* --- === नए स्टाइल का अंत === --- */
 
         .input-area { margin-top: 30px; }
         p { font-size: 1.2em; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
@@ -122,7 +138,6 @@
 
         #linkContainer { display: none; margin-top: 25px; }
 
-        /* --- विज्ञापन कंटेनर के लिए स्टाइल --- */
         .ad-container {
             margin: 15px 0; width: 100%; text-align: center; z-index: 2;
         }
@@ -138,25 +153,14 @@
     <canvas class="background-canvas" id="glitter-canvas"></canvas>
     <canvas id="fireworks-canvas"></canvas>
 
-    <!-- === ऊपर वाला विज्ञापन === -->
     <div class="ad-container">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '293c346ff3b50409d9211f545593daba',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/293c346ff3b50409d9211f545593daba/invoke.js"></script>
+        <!-- Ad code here -->
     </div>
 
     <div class="container">
         <h1 id="greeting">💖 हैप्पी रक्षाबंधन 💖</h1>
         <img id="rakhi-gif" src="rakhi.gif" alt="Happy Raksha Bandhan Animation">
         
-        <!-- भेजने वाले का नाम यहाँ दिखेगा -->
         <h2 id="senderNameDisplay"></h2>
 
         <div class="input-area">
@@ -175,23 +179,13 @@
         </div>
     </div>
     
-    <!-- === नीचे वाला विज्ञापन === -->
     <div class="ad-container">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '293c346ff3b50409d9211f545593daba',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/293c346ff3b50409d9211f545593daba/invoke.js"></script>
+        <!-- Ad code here -->
     </div>
 
     <script>
-        // --- Main Logic (Sharing, URL etc.) ---
         const generateBtn = document.getElementById('generateBtn');
+        const inputAreaParagraph = document.querySelector('.input-area p');
 
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -202,7 +196,7 @@
                 const decodedName = decodeURIComponent(senderName);
                 nameDisplayElement.innerHTML = `~ ${decodedName} की तरफ़ से ~`;
                 nameDisplayElement.style.display = 'block';
-                document.querySelector('.input-area').style.display = 'none';
+                inputAreaParagraph.textContent = 'अब आप भी अपना नाम लिखकर आगे भेजें:';
             }
         };
 
@@ -220,28 +214,23 @@
                 url: newUrl,
             };
 
-            // सीधे शेयर करने का प्रयास करें
             if (navigator.share) {
                 try {
                     await navigator.share(shareData);
                 } catch (err) {
-                    // अगर यूजर शेयरिंग कैंसिल करता है तो कोई एरर नहीं दिखाएँगे
                     console.error('Share failed:', err);
                 }
             } else {
-                // जिन ब्राउज़र में शेयरिंग सपोर्ट नहीं है, उनके लिए लिंक दिखाएँ
                 document.getElementById('linkContainer').style.display = 'block';
                 document.getElementById('generatedLink').value = shareData.url;
             }
         });
 
-        // --- Animation Scripts (Glitter + Fireworks) ---
-        // (एनिमेशन स्क्रिप्ट में कोई बदलाव नहीं)
+        // --- Animation Scripts (No changes here) ---
         const glitterCanvas = document.getElementById('glitter-canvas');
         const glitterCtx = glitterCanvas.getContext('2d');
         glitterCanvas.width = window.innerWidth;
         glitterCanvas.height = window.innerHeight;
-
         let stars = [];
         for (let i = 0; i < 150; i++) {
             stars.push({
@@ -252,7 +241,6 @@
                 dAlpha: Math.random() * 0.01
             });
         }
-
         function drawGlitter() {
             glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height);
             glitterCtx.fillStyle = "rgba(255, 255, 255, 0.8)";
