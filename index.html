@@ -6,250 +6,132 @@
 
     <meta property="og:title" content="💖✨ एक ख़ास राखी का संदेश ✨💖">
     <meta property="og:description" content="आपके किसी प्रिय ने आपके लिए रक्षाबंधन की शुभकामनाएँ भेजी हैं। देखने के लिए क्लिक करें!">
-    <!-- GitHub पर अपलोड करने के बाद इस लिंक को अपनी लाइव इमेज के URL से बदलें -->
     <meta property="og:image" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/rakhi.gif">
     <meta property="og:type" content="website">
 
     <title>Happy Raksha Bandhan - Royal Wishes</title>
     
     <style>
-        /* --- CSS स्टाइलिंग (Responsive और Royal Golden Theme) --- */
+        /* --- CSS स्टाइलिंग (कोई बदलाव नहीं) --- */
         @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&display=swap');
-        
-        :root {
-            --gold-color: #FFD700;
-            --dark-blue: #0f0c29;
-            --mid-blue: #302b63;
-        }
-
-        body {
-            font-family: 'Tiro Devanagari Hindi', serif;
-            margin: 0;
-            padding: 20px;
-            color: #fff;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: radial-gradient(ellipse at bottom, var(--dark-blue) 0%, var(--mid-blue) 100%);
-        }
-
-        .background-canvas, #fireworks-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            max-width: 550px;
-            width: 95%;
-            border: 1.5px solid rgba(255, 255, 255, 0.18);
-            text-align: center;
-            z-index: 1;
-            animation: zoomIn 1s ease-in-out;
-        }
-
-        #greeting {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--gold-color);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        }
-
-        #rakhi-gif {
-            max-width: 90%;
-            height: auto;
-            border-radius: 15px;
-            margin-top: 20px;
-            border: 4px solid var(--gold-color);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-        }
-        
-        #senderNameDisplay {
-            display: none;
-            font-size: 2em;
-            font-weight: 700;
-            margin-top: 25px;
-            /* एनिमेशन अब सीधे नाम पर लागू होगा */
-        }
-        
-        .sender-name {
-            font-weight: 900;
-            display: block; /* नाम को अलग लाइन में रखने के लिए */
-            animation: floatEnhanced 6s ease-in-out infinite, color-cycle 8s ease-in-out infinite;
-            background: linear-gradient(45deg, #ff00ff, #ffdb00, #adff2f, #00c3ff);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: none; /* कलर एनिमेशन के लिए शैडो हटा दें */
-        }
-
-        .from-text {
-            font-size: 0.6em; /* नाम से छोटा टेक्स्ट */
-            font-weight: 400;
-            color: #f0f0f0;
-            letter-spacing: 1px;
-            margin-top: 5px;
-            display: block;
-        }
-
-        @keyframes floatEnhanced {
-            0%, 100% {
-                transform: translateY(0) rotateZ(0deg);
-            }
-            25% {
-                transform: translateY(-12px) rotateZ(-4deg);
-            }
-            50% {
-                transform: translateY(0) rotateZ(0deg);
-            }
-            75% {
-                transform: translateY(-8px) rotateZ(4deg);
-            }
-        }
-        
-        @keyframes color-cycle {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
+        :root { --gold-color: #FFD700; --dark-blue: #0f0c29; --mid-blue: #302b63; --light-blue: #24243e; }
+        body { font-family: 'Tiro Devanagari Hindi', serif; margin: 0; padding: 20px; color: #fff; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .background-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(ellipse at bottom, var(--dark-blue) 0%, var(--mid-blue) 100%); }
+        #fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); max-width: 500px; width: 90%; border: 1.5px solid rgba(255, 255, 255, 0.18); text-align: center; z-index: 1; animation: zoomIn 1s ease-in-out; margin-bottom: 20px; }
+        #greeting { font-size: 2.6em; font-weight: 700; color: var(--gold-color); text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); }
+        #rakhi-gif { max-width: 90%; height: auto; border-radius: 15px; margin-top: 20px; border: 4px solid var(--gold-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
         .input-area { margin-top: 30px; }
-        p { font-size: 1.1em; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
-
-        #nameInput {
-            width: 85%; padding: 12px; border-radius: 30px;
-            border: 2px solid rgba(255, 215, 0, 0.5); font-size: 1em;
-            margin-bottom: 25px; text-align: center;
-            background-color: rgba(0, 0, 0, 0.2); color: white;
-            transition: all 0.3s;
-        }
+        p { font-size: 1.2em; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
+        #nameInput { width: 80%; padding: 12px; border-radius: 30px; border: 2px solid rgba(255, 215, 0, 0.5); font-size: 1em; margin-bottom: 25px; text-align: center; background-color: rgba(0, 0, 0, 0.2); color: white; transition: border-color 0.3s, box-shadow 0.3s; }
         #nameInput::placeholder { color: rgba(255, 255, 255, 0.6); }
-        #nameInput:focus {
-            outline: none; border-color: var(--gold-color);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-
-        #generateBtn {
-            background: linear-gradient(45deg, #FFC107, #FFD700); color: #333;
-            padding: 12px 25px; border: none; border-radius: 30px; font-size: 1.1em;
-            font-weight: 700; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-flex;
-            align-items: center; justify-content: center;
-        }
-        #generateBtn:hover {
-            transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-        }
-        #whatsapp-icon { width: 22px; height: 22px; margin-right: 10px; fill: #333; }
-        
-        .ad-container {
-            margin: 20px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 50px;
-            z-index: 2;
-        }
-        
+        #nameInput:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+        #generateBtn { background: linear-gradient(45deg, #FFC107, #FFD700); color: #333; padding: 12px 30px; border: none; border-radius: 30px; font-size: 1.2em; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-flex; align-items: center; justify-content: center; }
+        #generateBtn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4); }
+        #whatsapp-icon { width: 24px; height: 24px; margin-right: 10px; }
+        .ad-container { margin-top: 20px; margin-bottom: 20px; width: 100%; text-align: center; z-index: 2; }
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-
-        @media (min-width: 600px) {
-            #greeting { font-size: 3em; }
-            #senderNameDisplay { font-size: 2.5em; }
-            p { font-size: 1.3em; }
-            #generateBtn { padding: 15px 35px; font-size: 1.3em; }
-            #whatsapp-icon { width: 28px; height: 28px; }
-        }
     </style>
 </head>
 <body>
 
+    <script async="async" data-cfasync="false" src="//pl27251273.profitableratecpm.com/4602f664803407cfda1aae472a65c04e/invoke.js"></script>
+    <div id="container-4602f664803407cfda1aae472a65c04e"></div>
+
     <canvas class="background-canvas" id="glitter-canvas"></canvas>
     <canvas id="fireworks-canvas"></canvas>
-
-    <div class="ad-container">
-        <!-- यहाँ अपना विज्ञापन कोड (जैसे AdSense) डालें -->
-    </div>
 
     <div class="container">
         <h1 id="greeting">💖 हैप्पी रक्षाबंधन 💖</h1>
         <img id="rakhi-gif" src="rakhi.gif" alt="Happy Raksha Bandhan Animation">
-        <h2 id="senderNameDisplay"></h2>
-        
+
         <div class="input-area">
             <p>अपना नाम लिखें और यह प्यारा संदेश भेजें:</p>
             <input type="text" id="nameInput" placeholder="यहाँ अपना पूरा नाम लिखें">
             <button id="generateBtn">
-                <svg id="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4.2 13.4c-.4.7-1.1.9-1.7.5l-1.3-.9c-.4-.3-.9-.4-1.4-.2-1.3.4-2.6.2-3.8-1-1.3-1.4-1.6-3.2-.8-4.7.4-.7 1.1-.9 1.7-.5l.7.5c.5.4.7 1.1.3 1.7l-.5 1c-.3.5-.2 1.1.2 1.5s1 .5 1.5.2l1-.5c.5-.3 1.1-.2 1.7.3l.1.1c.5.5.5 1.3.2 1.8z"/></svg>
+                <svg id="whatsapp-icon" viewBox="0 0 24 24" fill="#333" xmlns="http://www.w3.org/2000/svg"><path d="M16.75 13.96c.25.58.11 1.25-.37 1.62l-1.35.9c-.43.29-.97.4-1.48.24-.76-.23-1.63-.67-2.48-1.3-1.12-.83-2-1.95-2.28-2.67-.3-.72.1-1.47.76-1.93l.7-.48c.55-.37 1.3-.23 1.7.27l.95 1.18c.37.45.37.9.14 1.32l-.54.96c-.23.42-.16.9.17 1.23s.8.35 1.22.12l.96-.54c.42-.23.97-.23 1.32.14l.14.14zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                 WhatsApp पर भेजें
             </button>
         </div>
     </div>
-    
+
+    <!-- === विज्ञापन कोड यहाँ डालें === -->
     <div class="ad-container">
-        <!-- यहाँ अपना विज्ञापन कोड (जैसे AdSense) डालें -->
+        <script type='text/javascript' src='//pl27270386.profitableratecpm.com/75/25/24/752524902fd57d63f18f963c43e2d393.js'></script>
     </div>
+    <!-- === विज्ञापन कोड समाप्त === -->
 
     <script>
-        const generateBtn = document.getElementById('generateBtn');
-        const inputAreaParagraph = document.querySelector('.input-area p');
-
+        // --- Main Logic ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('name');
-            const nameDisplayElement = document.getElementById('senderNameDisplay');
-            
-            if (senderName && nameDisplayElement) {
+            if (senderName) {
                 const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
-                // नाम और "की तरफ से" को अलग-अलग स्टाइल के लिए स्पैन में डालें
-                nameDisplayElement.innerHTML = `<span class="sender-name">${decodedName}</span><span class="from-text">की तरफ़ से</span>`;
-                nameDisplayElement.style.display = 'block';
-                inputAreaParagraph.textContent = 'अब आप भी अपना नाम लिखकर आगे भेजें:';
+                document.getElementById('greeting').innerHTML = `💖 हैप्पी रक्षाबंधन 💖<br><span style="font-size: 0.6em; color: #FFD700;">~ ${decodedName} की तरफ़ से ~</span>`;
             }
         };
 
-        generateBtn.addEventListener('click', async function() {
+        document.getElementById('generateBtn').addEventListener('click', async function() {
             const name = document.getElementById('nameInput').value.trim();
-            if (!name) { 
-                alert("कृपया अपना नाम अवश्य लिखें!"); 
-                return; 
+            if (!name) {
+                alert("कृपया अपना नाम अवश्य लिखें!");
+                return;
             }
-            
-            const newUrl = `${window.location.origin + window.location.pathname}?name=${encodeURIComponent(name)}`;
-            const shareData = {
-                title: '💖✨ एक ख़ास राखी का संदेश ✨💖',
-                text: `आपके प्रिय ${name} ने आपके लिए रक्षाबंधन की यह प्यारी शुभकामना भेजी है!`,
-                url: newUrl,
-            };
 
+            const pageUrl = `${window.location.origin + window.location.pathname}?name=${encodeURIComponent(name)}`;
+            const messageText = `आपके प्रिय ${name} ने आपके लिए रक्षाबंधन की यह प्यारी शुभकामना भेजी है! 💖✨\n\nदेखने के लिए नीचे दिए लिंक पर क्लिक करें 👇\n${pageUrl}`;
+
+            // Modern sharing for mobile (navigator.share)
             if (navigator.share) {
                 try {
-                    await navigator.share(shareData);
+                    await navigator.share({
+                        title: '💖✨ एक ख़ास राखी का संदेश ✨💖',
+                        text: messageText,
+                        url: pageUrl, // URL is often ignored when text is present, so including it in text is better.
+                    });
                 } catch (err) {
                     console.error('Share failed:', err);
                 }
             } else {
-                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`;
+                // Fallback for desktop or unsupported browsers
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`;
                 window.open(whatsappUrl, '_blank');
             }
         });
-
-        // बाकी जावास्क्रिप्ट (एनिमेशन) में कोई बदलाव नहीं
+        
+        // --- Animation Scripts (Glitter + Fireworks - कोई बदलाव नहीं) ---
         const glitterCanvas = document.getElementById('glitter-canvas');
         const glitterCtx = glitterCanvas.getContext('2d');
         glitterCanvas.width = window.innerWidth;
         glitterCanvas.height = window.innerHeight;
-        let stars = []; for (let i = 0; i < 150; i++) { stars.push({ x: Math.random() * glitterCanvas.width, y: Math.random() * glitterCanvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 }); }
-        function drawGlitter() { glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height); glitterCtx.fillStyle = "rgba(255, 255, 255, 0.8)"; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha > 1 || star.alpha < 0) { star.dAlpha *= -1; } glitterCtx.globalAlpha = star.alpha; glitterCtx.beginPath(); glitterCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); glitterCtx.fill(); }); requestAnimationFrame(drawGlitter); }
+
+        let stars = [];
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * glitterCanvas.width,
+                y: Math.random() * glitterCanvas.height,
+                radius: Math.random() * 1.5,
+                alpha: Math.random(),
+                dAlpha: Math.random() * 0.01
+            });
+        }
+
+        function drawGlitter() {
+            glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height);
+            glitterCtx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            stars.forEach(star => {
+                star.alpha += star.dAlpha;
+                if (star.alpha > 1 || star.alpha < 0) { star.dAlpha *= -1; }
+                glitterCtx.globalAlpha = star.alpha;
+                glitterCtx.beginPath();
+                glitterCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                glitterCtx.fill();
+            });
+            requestAnimationFrame(drawGlitter);
+        }
         drawGlitter();
+
         const fireworkCanvas = document.getElementById('fireworks-canvas');
         const fireworkCtx = fireworkCanvas.getContext('2d');
         fireworkCanvas.width = window.innerWidth; fireworkCanvas.height = window.innerHeight;
@@ -265,5 +147,6 @@
         window.addEventListener('resize',()=>{fireworkCanvas.width=window.innerWidth;fireworkCanvas.height=window.innerHeight;glitterCanvas.width=window.innerWidth;glitterCanvas.height=window.innerHeight;});
         loop();
     </script>
+
 </body>
 </html>
