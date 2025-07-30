@@ -12,7 +12,7 @@
     <title>Happy Raksha Bandhan - Royal Wishes</title>
     
     <style>
-        /* --- CSS स्टाइलिंग (कोई बदलाव नहीं) --- */
+        /* --- CSS --- */
         @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&display=swap');
         :root { --gold-color: #FFD700; --dark-blue: #0f0c29; --mid-blue: #302b63; --light-blue: #24243e; }
         body { font-family: 'Tiro Devanagari Hindi', serif; margin: 0; padding: 20px; color: #fff; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
@@ -20,6 +20,17 @@
         #fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); max-width: 500px; width: 90%; border: 1.5px solid rgba(255, 255, 255, 0.18); text-align: center; z-index: 1; animation: zoomIn 1s ease-in-out; margin-bottom: 20px; }
         #greeting { font-size: 2.6em; font-weight: 700; color: var(--gold-color); text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); }
+        
+        /* === CODE CHANGE START: CSS style for the new name element === */
+        #sender-name {
+            font-size: 1.6em; /* Slightly bigger font for the name */
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            margin-top: 10px; /* Space between greeting and name */
+            min-height: 30px; /* Reserve space to prevent layout shift */
+        }
+        /* === CODE CHANGE END === */
+
         #rakhi-gif { max-width: 90%; height: auto; border-radius: 15px; margin-top: 20px; border: 4px solid var(--gold-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
         .input-area { margin-top: 30px; }
         p { font-size: 1.2em; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
@@ -34,15 +45,16 @@
     </style>
 </head>
 <body>
-
-    <script async="async" data-cfasync="false" src="//pl27251273.profitableratecpm.com/4602f664803407cfda1aae472a65c04e/invoke.js"></script>
-    <div id="container-4602f664803407cfda1aae472a65c04e"></div>
-
     <canvas class="background-canvas" id="glitter-canvas"></canvas>
     <canvas id="fireworks-canvas"></canvas>
 
     <div class="container">
         <h1 id="greeting">💖 हैप्पी रक्षाबंधन 💖</h1>
+        
+        <!-- === CODE CHANGE START: New empty element for the sender's name === -->
+        <p id="sender-name"></p>
+        <!-- === CODE CHANGE END === -->
+        
         <img id="rakhi-gif" src="rakhi.gif" alt="Happy Raksha Bandhan Animation">
 
         <div class="input-area">
@@ -54,25 +66,24 @@
             </button>
         </div>
     </div>
-
-    <!-- === विज्ञापन कोड यहाँ डालें === -->
-    <div class="ad-container">
-        <script type='text/javascript' src='//pl27270386.profitableratecpm.com/75/25/24/752524902fd57d63f18f963c43e2d393.js'></script>
-    </div>
-    <!-- === विज्ञापन कोड समाप्त === -->
-
+    
     <script>
         // --- Main Logic ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('name');
+
+            // === CODE CHANGE START: Put name in the new element ===
             if (senderName) {
                 const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
-                document.getElementById('greeting').innerHTML = `💖 हैप्पी रक्षाबंधन 💖<br><span style="font-size: 0.6em; color: #FFD700;">~ ${decodedName} की तरफ़ से ~</span>`;
+                // Target the new 'sender-name' element instead of 'greeting'
+                document.getElementById('sender-name').innerHTML = `~ ${decodedName} की तरफ़ से ~`;
             }
+            // === CODE CHANGE END ===
         };
 
         document.getElementById('generateBtn').addEventListener('click', async function() {
+            // ... (rest of the script is unchanged)
             const name = document.getElementById('nameInput').value.trim();
             if (!name) {
                 alert("कृपया अपना नाम अवश्य लिखें!");
@@ -82,25 +93,23 @@
             const pageUrl = `${window.location.origin + window.location.pathname}?name=${encodeURIComponent(name)}`;
             const messageText = `आपके प्रिय ${name} ने आपके लिए रक्षाबंधन की यह प्यारी शुभकामना भेजी है! 💖✨\n\nदेखने के लिए नीचे दिए लिंक पर क्लिक करें 👇\n${pageUrl}`;
 
-            // Modern sharing for mobile (navigator.share)
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: '💖✨ एक ख़ास राखी का संदेश ✨💖',
                         text: messageText,
-                        url: pageUrl, // URL is often ignored when text is present, so including it in text is better.
+                        url: pageUrl,
                     });
                 } catch (err) {
                     console.error('Share failed:', err);
                 }
             } else {
-                // Fallback for desktop or unsupported browsers
                 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`;
                 window.open(whatsappUrl, '_blank');
             }
         });
         
-        // --- Animation Scripts (Glitter + Fireworks - कोई बदलाव नहीं) ---
+        // --- Animation Scripts (Glitter + Fireworks - no changes needed) ---
         const glitterCanvas = document.getElementById('glitter-canvas');
         const glitterCtx = glitterCanvas.getContext('2d');
         glitterCanvas.width = window.innerWidth;
@@ -147,6 +156,5 @@
         window.addEventListener('resize',()=>{fireworkCanvas.width=window.innerWidth;fireworkCanvas.height=window.innerHeight;glitterCanvas.width=window.innerWidth;glitterCanvas.height=window.innerHeight;});
         loop();
     </script>
-
 </body>
 </html>
