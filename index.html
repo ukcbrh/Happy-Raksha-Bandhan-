@@ -14,95 +14,137 @@
     <style>
         /* --- CSS --- */
         @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&display=swap');
-        :root { --gold-color: #FFD700; --dark-blue: #0f0c29; --mid-blue: #302b63; --light-blue: #24243e; }
-        body { font-family: 'Tiro Devanagari Hindi', serif; margin: 0; padding: 20px; color: #fff; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-        .background-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(ellipse at bottom, var(--dark-blue) 0%, var(--mid-blue) 100%); }
-        #fireworks-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); max-width: 500px; width: 90%; border: 1.5px solid rgba(255, 255, 255, 0.18); text-align: center; z-index: 1; animation: zoomIn 1s ease-in-out; margin-bottom: 20px; }
-        #greeting { font-size: 2.6em; font-weight: 700; color: var(--gold-color); text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); margin-bottom: 0; }
         
-        /* === CODE CHANGE START: CSS for new sender elements and animations === */
-        .sender-details {
-            margin-top: 15px;
-            min-height: 70px; /* Reserve space */
+        :root { 
+            --gold-color: #FFD700; 
+            --dark-blue: #0f0c29; 
+            --mid-blue: #302b63; 
+            --light-blue: #24243e;
+            --deep-purple: #4c0e64;
         }
-
-        #sender-name {
-            font-size: 1.8em;
-            color: var(--gold-color);
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            margin: 0;
-            font-weight: 700;
-            animation: floatInAir 4s ease-in-out infinite; /* Floating animation */
+        body { 
+            font-family: 'Tiro Devanagari Hindi', serif; 
+            margin: 0; 
+            padding: 20px; 
+            color: #fff; 
+            overflow-x: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
         }
-        
-        #from-message {
-            font-size: 1.1em;
-            color: #f0f0f0;
-            text-shadow: 1px 1px 4px #000;
-            margin-top: 5px;
+        .background-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -3;
+            background: radial-gradient(ellipse at bottom, var(--dark-blue) 0%, var(--deep-purple) 100%); 
         }
-
-        .animated-ad-wrapper {
+        #rakhi-rain-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            text-align: center;
-            z-index: 2;
-            animation: moveAdUpDown 3s ease-in-out infinite; /* Ad movement animation */
+            height: 100%;
+            z-index: -2;
+        }
+        #fireworks-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
         }
         
-        @keyframes floatInAir {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
+        .container { 
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: none;
+            max-width: 500px; 
+            width: 90%; 
+            border: none;
+            text-align: center; 
+            z-index: 1; 
+            animation: zoomIn 1s ease-in-out; 
+            margin-bottom: 20px; 
         }
 
-        @keyframes moveAdUpDown {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-            100% { transform: translateY(0); }
+        #greeting { 
+            font-size: 2.8em;
+            font-weight: 700; 
+            color: var(--gold-color); 
+            text-shadow: 0 0 15px var(--gold-color), 2px 2px 5px rgba(0,0,0,0.7);
         }
-        /* === CODE CHANGE END === */
+        
+        #sender-name {
+            font-size: 1.6em;
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            margin-top: 10px;
+            min-height: 30px;
+        }
+
+        #message-display {
+            font-size: 1.2em;
+            color: #fff;
+            font-style: italic;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+            min-height: 25px; 
+        }
 
         #rakhi-gif { max-width: 90%; height: auto; border-radius: 15px; margin-top: 20px; border: 4px solid var(--gold-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
         .input-area { margin-top: 30px; }
-        .input-area p { font-size: 1.2em; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
-        #nameInput { width: 80%; padding: 12px; border-radius: 30px; border: 2px solid rgba(255, 215, 0, 0.5); font-size: 1em; margin-bottom: 25px; text-align: center; background-color: rgba(0, 0, 0, 0.2); color: white; transition: border-color 0.3s, box-shadow 0.3s; }
+        p { font-size: 1.2em; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 4px #000; }
+        #nameInput { width: 80%; padding: 12px; border-radius: 30px; border: 2px solid rgba(255, 215, 0, 0.5); font-size: 1em; margin-bottom: 15px; text-align: center; background-color: rgba(0, 0, 0, 0.2); color: white; transition: border-color 0.3s, box-shadow 0.3s; }
         #nameInput::placeholder { color: rgba(255, 255, 255, 0.6); }
         #nameInput:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+        
+        #messageInput {
+            width: 80%; padding: 12px; border-radius: 20px; border: 2px solid rgba(255, 215, 0, 0.5); font-size: 1em; margin-bottom: 25px; text-align: center; background-color: rgba(0, 0, 0, 0.2); color: white; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Tiro Devanagari Hindi', serif; height: 70px; resize: vertical;
+        }
+        #messageInput::placeholder { color: rgba(255, 255, 255, 0.6); }
+        #messageInput:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+
         #generateBtn { background: linear-gradient(45deg, #FFC107, #FFD700); color: #333; padding: 12px 30px; border: none; border-radius: 30px; font-size: 1.2em; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-flex; align-items: center; justify-content: center; }
-        #generateBtn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4); }
+        #generateBtn:hover { 
+            transform: scale(1.05) translateY(-2px); 
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); 
+        }
         #whatsapp-icon { width: 24px; height: 24px; margin-right: 10px; }
-        .ad-container { margin-top: 20px; margin-bottom: 20px; width: 100%; text-align: center; z-index: 2; }
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
-
-    <!-- === NEW TOP AD PLACEMENT START === -->
-    <div class="animated-ad-wrapper" style="margin-bottom: 15px;">
-        <script async="async" data-cfasync="false" src="//pl27251273.profitableratecpm.com/4602f664803407cfda1aae472a65c04e/invoke.js"></script>
-        <div id="container-4602f664803407cfda1aae472a65c04e"></div>
-    </div>
-    <!-- === NEW TOP AD PLACEMENT END === -->
+    <audio id="rakhi-audio" loop>
+        <source src="rakhi.mp3" type="audio/mpeg">
+        आपका ब्राउज़र ऑडियो एलिमेंट को सपोर्ट नहीं करता।
+    </audio>
 
     <canvas class="background-canvas" id="glitter-canvas"></canvas>
+    <canvas id="rakhi-rain-canvas"></canvas>
     <canvas id="fireworks-canvas"></canvas>
 
     <div class="container">
         <h1 id="greeting">💖 हैप्पी रक्षाबंधन 💖</h1>
         
-        <!-- === CODE CHANGE START: New elements for sender's name and message === -->
-        <div class="sender-details">
-            <p id="sender-name"></p>
-            <p id="from-message"></p>
-        </div>
-        <!-- === CODE CHANGE END === -->
+        <p id="sender-name"></p>
+        <p id="message-display"></p>
         
         <img id="rakhi-gif" src="rakhi.gif" alt="Happy Raksha Bandhan Animation">
 
         <div class="input-area">
-            <p>अपना नाम लिखें और यह प्यारा संदेश भेजें:</p>
+            <p>अपना नाम और संदेश लिखें:</p>
             <input type="text" id="nameInput" placeholder="यहाँ अपना पूरा नाम लिखें">
+            <textarea id="messageInput" placeholder="यहाँ अपना संदेश लिखें (वैकल्पिक)"></textarea>
             <button id="generateBtn">
                 <svg id="whatsapp-icon" viewBox="0 0 24 24" fill="#333" xmlns="http://www.w3.org/2000/svg"><path d="M16.75 13.96c.25.58.11 1.25-.37 1.62l-1.35.9c-.43.29-.97.4-1.48.24-.76-.23-1.63-.67-2.48-1.3-1.12-.83-2-1.95-2.28-2.67-.3-.72.1-1.47.76-1.93l.7-.48c.55-.37 1.3-.23 1.7.27l.95 1.18c.37.45.37.9.14 1.32l-.54.96c-.23.42-.16.9.17 1.23s.8.35 1.22.12l.96-.54c.42-.23.97-.23 1.32.14l.14.14zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                 WhatsApp पर भेजें
@@ -110,56 +152,50 @@
         </div>
     </div>
     
-    <!-- === EXISTING BOTTOM AD START === -->
-    <div class="animated-ad-wrapper">
-        <script async="async" data-cfasync="false" src="//pl27251273.profitableratecpm.com/4602f664803407cfda1aae472a65c04e/invoke.js"></script>
-        <div id="container-4602f664803407cfda1aae472a65c04e"></div>
-    </div>
-    <!-- === EXISTING BOTTOM AD END === -->
-    
     <script>
-        // --- Main Logic ---
+        function playAudio() {
+            const audio = document.getElementById('rakhi-audio');
+            audio.play().catch(error => console.log("Audio play was prevented: ", error));
+            document.body.removeEventListener('click', playAudio);
+        }
+        document.body.addEventListener('click', playAudio);
+
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('name');
+            const customMessage = urlParams.get('msg');
 
-            // === CODE CHANGE START: Put name and message in separate elements ===
             if (senderName) {
                 const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
-                document.getElementById('sender-name').textContent = `~ ${decodedName} ~`;
-                document.getElementById('from-message').textContent = 'की तरफ़ से भेजा गया';
+                document.getElementById('sender-name').innerHTML = `~ ${decodedName} की तरफ़ से ~`;
             }
-            // === CODE CHANGE END ===
+            if (customMessage) {
+                const decodedMessage = decodeURIComponent(customMessage.replace(/\+/g, ' '));
+                document.getElementById('message-display').innerText = `"${decodedMessage}"`;
+            }
         };
 
         document.getElementById('generateBtn').addEventListener('click', async function() {
-            // ... (rest of the script is unchanged)
             const name = document.getElementById('nameInput').value.trim();
+            const customMessage = document.getElementById('messageInput').value.trim();
             if (!name) {
-                alert("कृपया अपना नाम अवश्य लिखें!");
-                return;
+                alert("कृपया अपना नाम अवश्य लिखें!"); return;
             }
-
-            const pageUrl = `${window.location.origin + window.location.pathname}?name=${encodeURIComponent(name)}`;
-            const messageText = `आपके प्रिय ${name} ने आपके लिए रक्षाबंधन की यह प्यारी शुभकामना भेजी है! 💖✨\n\nदेखने के लिए नीचे दिए लिंक पर क्लिक करें 👇\n${pageUrl}`;
-
+            let pageUrl = `${window.location.origin + window.location.pathname}?name=${encodeURIComponent(name)}`;
+            if (customMessage) { pageUrl += `&msg=${encodeURIComponent(customMessage)}`; }
+            let messageText = `आपके प्रिय ${name} ने आपके लिए रक्षाबंधन की यह प्यारी शुभकामना भेजी है! 💖✨\n\n`;
+            if (customMessage) { messageText += `उनका संदेश है: "${customMessage}"\n\n`; }
+            messageText += `देखने के लिए नीचे दिए लिंक पर क्लिक करें 👇\n${pageUrl}`;
             if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: '💖✨ एक ख़ास राखी का संदेश ✨💖',
-                        text: messageText,
-                        url: pageUrl,
-                    });
-                } catch (err) {
-                    console.error('Share failed:', err);
-                }
+                try { await navigator.share({ title: '💖✨ एक ख़ास राखी का संदेश ✨💖', text: messageText, url: pageUrl });
+                } catch (err) { console.error('Share failed:', err); }
             } else {
                 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`;
                 window.open(whatsappUrl, '_blank');
             }
         });
         
-        // --- Animation Scripts (Glitter + Fireworks - no changes needed) ---
+        // --- Animation Scripts ---
         const glitterCanvas = document.getElementById('glitter-canvas');
         const glitterCtx = glitterCanvas.getContext('2d');
         glitterCanvas.width = window.innerWidth;
@@ -167,15 +203,8 @@
 
         let stars = [];
         for (let i = 0; i < 150; i++) {
-            stars.push({
-                x: Math.random() * glitterCanvas.width,
-                y: Math.random() * glitterCanvas.height,
-                radius: Math.random() * 1.5,
-                alpha: Math.random(),
-                dAlpha: Math.random() * 0.01
-            });
+            stars.push({ x: Math.random() * glitterCanvas.width, y: Math.random() * glitterCanvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 });
         }
-
         function drawGlitter() {
             glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height);
             glitterCtx.fillStyle = "rgba(255, 255, 255, 0.8)";
@@ -189,7 +218,38 @@
             });
             requestAnimationFrame(drawGlitter);
         }
-        drawGlitter();
+
+        // === राखी की बारिश का एनीमेशन ===
+        const rakhiCanvas = document.getElementById('rakhi-rain-canvas');
+        const rakhiCtx = rakhiCanvas.getContext('2d');
+        rakhiCanvas.width = window.innerWidth;
+        rakhiCanvas.height = window.innerHeight;
+        let rakhis = [];
+        const rakhiEmojis = ['🎁', '🎀', '💖'];
+        // === यहाँ बदलाव किया गया है (50 से 25) ===
+        for (let i = 0; i < 25; i++) {
+            rakhis.push({
+                x: Math.random() * rakhiCanvas.width,
+                y: Math.random() * rakhiCanvas.height,
+                size: Math.random() * 20 + 15,
+                speed: Math.random() * 3 + 1,
+                char: rakhiEmojis[Math.floor(Math.random() * rakhiEmojis.length)]
+            });
+        }
+        function drawRakhiRain() {
+            rakhiCtx.clearRect(0, 0, rakhiCanvas.width, rakhiCanvas.height);
+            rakhis.forEach(r => {
+                rakhiCtx.fillStyle = 'white'; 
+                rakhiCtx.font = `${r.size}px serif`;
+                rakhiCtx.fillText(r.char, r.x, r.y);
+                r.y += r.speed;
+                if (r.y > rakhiCanvas.height + r.size) {
+                    r.y = -r.size;
+                    r.x = Math.random() * rakhiCanvas.width;
+                }
+            });
+            requestAnimationFrame(drawRakhiRain);
+        }
 
         const fireworkCanvas = document.getElementById('fireworks-canvas');
         const fireworkCtx = fireworkCanvas.getContext('2d');
@@ -203,8 +263,19 @@
         Particle.prototype.draw=function(){fireworkCtx.beginPath();fireworkCtx.moveTo(this.coordinates[this.coordinates.length-1][0],this.coordinates[this.coordinates.length-1][1]);fireworkCtx.lineTo(this.x,this.y);fireworkCtx.strokeStyle=this.color;fireworkCtx.globalAlpha=this.alpha;fireworkCtx.stroke();fireworkCtx.globalAlpha=1};
         function createParticles(x,y){let p=100;while(p--){particles.push(new Particle(x,y))}}
         function loop(){requestAnimationFrame(loop);fireworkCtx.globalCompositeOperation='destination-out';fireworkCtx.fillStyle='rgba(0,0,0,0.5)';fireworkCtx.fillRect(0,0,fireworkCanvas.width,fireworkCanvas.height);fireworkCtx.globalCompositeOperation='lighter';let i=fireworks.length;while(i--){fireworks[i].update(i);fireworks[i].draw()}let j=particles.length;while(j--){particles[j].update(j);particles[j].draw()}if(Math.random()<0.12){fireworks.push(new Firework(fireworkCanvas.width/2,fireworkCanvas.height,Math.random()*fireworkCanvas.width,Math.random()*fireworkCanvas.height/2))}}
-        window.addEventListener('resize',()=>{fireworkCanvas.width=window.innerWidth;fireworkCanvas.height=window.innerHeight;glitterCanvas.width=window.innerWidth;glitterCanvas.height=window.innerHeight;});
+        
+        drawGlitter();
+        drawRakhiRain();
         loop();
+
+        window.addEventListener('resize',()=>{
+            glitterCanvas.width=window.innerWidth;
+            glitterCanvas.height=window.innerHeight;
+            rakhiCanvas.width=window.innerWidth;
+            rakhiCanvas.height=window.innerHeight;
+            fireworkCanvas.width=window.innerWidth;
+            fireworkCanvas.height=window.innerHeight;
+        });
     </script>
 </body>
-</html>
+</html>```
